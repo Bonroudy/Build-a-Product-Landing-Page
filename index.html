@@ -1,0 +1,166 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Build a Technical Documentation Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header> <img alt="image" src="https://cdn.shopify.com/s/files/1/0533/2089/files/vuejs-tutorial_2d2a853c-aa2f-44b0-80df-933b495f77f8.png?v=1509478492"></header>
+ 
+    <nav id="navbar">
+
+        <ul> 
+    <a class="nav-link" href="#installation" rel="internal"><li>Installation</li></a>
+<a class="nav-link" href="#introduction" rel="internal"><li>Introduction</li></a>
+<a class="nav-link" href="#instance" rel="internal"><li>The Vue Instance</li></a>
+<a class="nav-link" href="#template" rel="internal"><li>Template Syntax</li></a>
+<a class="nav-link" href="#components" rel="internal"><li>Components Basics</li></a>
+</ul>
+</nav>
+           
+        
+
+
+<main id="main-doc">
+        <section class="main-section">
+                <p id="installation"><h1>Installation</h1></p>
+                <p><h2><em>Compatibility Note</em></h2></p>
+                <p>Vue does not support IE8 and below, because it uses ECMAScript 5 features that are un-shimmable in IE8. However it supports all ECMAScript 5 compliant browsers.</p>
+                <p><h2><em>Release Notes</em></h2></p>
+                <p>Latest stable version: 2.6.10
+                  Detailed release notes for each version are available on GitHub.</p>
+                <p><h2><em>Vue Devtools</em></h2></p>
+                <p>When using Vue, we recommend also installing the Vue Devtools in your browser, allowing you to inspect and debug your Vue applications in a more user-friendly interface.</p>
+                <p>For prototyping or learning purposes, you can use the latest version with:</p>
+
+                <p>
+                    
+                <p></p>
+            </section>
+        <section class="main-section">
+                <p id="introduction"><h1>Introduction</h1></p>
+                <p> <em> <h2>what is Vue.js?</h2></em></p>
+                <p>Vue (pronounced /vjuː/, like view) is a progressive framework for building user interfaces. Unlike other monolithic frameworks, Vue is designed from the ground up to be incrementally adoptable. The core library is focused on the view layer only, and is easy to pick up and integrate with other libraries or existing projects.
+                     On the other hand, Vue is also perfectly capable of powering sophisticated Single-Page Applications when used in combination with modern tooling and supporting libraries.</p>
+                <p>If you’d like to learn more about Vue before diving in, we created a video walking through the core principles and a sample project.</p>
+                <p>If you are an experienced frontend developer and want to know how Vue compares to other libraries/frameworks, check out the Comparison with Other Frameworks.</p>
+                <p><a href="https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance/" target="_blank" rel="sponsored noopener" title="Free Vue.js Course">Watch a free video course on Vue Mastery</a></p>
+                <p><em>Getting Started</em></p>
+                <p>The official guide assumes intermediate level knowledge of HTML, CSS, and JavaScript. If you are totally new to frontend development, it might not be the best idea to jump right into a framework as your first step - grasp the basics then come back! Prior experience with other frameworks helps, but is not required.</p>
+                <p>The easiest way to try out Vue.js is using the JSFiddle Hello World example. Feel free to open it in another tab and follow along as we go through some basic examples. Or, you can create an index.html file and include Vue with:</p>
+                <p><pre><code><span style="color:#8877A3">
+    !-- development version, includes -&gt;
+    var vm = new Vue({
+     // options 
+    })
+                </span></code></pre></p>
+        </section>
+   
+    
+    <section class="main-section">
+        <p id="instance"><h1>The Vue Instance</h1></p>
+        <p> <em> <h2>Creating a Vue Instance</h2></em></p>
+        <p>lthough not strictly associated with the MVVM pattern, Vue’s design was partly inspired by it. As a convention, we often use the variable vm (short for ViewModel) to refer to our Vue instance.</p>
+        <p>When you create a Vue instance, you pass in an options object. The majority of this guide describes how you can use these options to create your desired behavior. For reference, you can also browse the full list of options in the API reference.</p>
+        <p>A Vue application consists of a root Vue instance created with new Vue, optionally organized into a tree of nested, reusable components. For example, a todo app’s component tree might look like this:</p>
+        <p><pre><code><span style="color:#8877A3">
+ Root Instance
+    └─ TodoList
+            ├─ TodoItem
+            │  ├─ DeleteTodoButton
+            │  └─ EditTodoButton
+            └─ TodoListFooter
+            ├─ ClearTodosButton
+            └─ TodoListStatistics</span></code></pre></p>
+        <p>e’ll talk about the component system in detail later. For now, just know that all Vue components are also Vue instances, and so accept the same options object (except for a few root-specific options).</p>
+        <p>When a Vue instance is created, it adds all the properties found in its data object to Vue’s reactivity system. When the values of those properties change, the view will “react”, updating to match the new values.</p>
+        <p>
+                      
+                    <pre><code><span style="color:#8877A3">
+// Our data object
+var data = { a: 1 }
+// The object is added to a Vue instance
+var vm = new Vue({
+  data: data
+ })
+                
+ // Getting the property on the instance
+ // returns the one from the original data
+vm.a == data.a // => true
+                
+// Setting the property on the instance
+// also affects the original data
+vm.a = 2
+data.a // => 2
+// ... and vice-versa
+data.a = 3
+vm.a // => 3
+            </span></code></pre></p>
+        <p>Each Vue instance goes through a series of initialization steps when it’s created - for example, it needs to set up data observation, compile the template, mount the instance to the DOM, and update the DOM when data changes. Along the way, it also runs functions called lifecycle hooks, giving users the opportunity to add their own code at specific stages.</p>
+    </section>
+    <section class="main-section">
+        <p id="template"><h1>Template Syntax</h1></p>
+        <p> <em> <h2>Interpolations</h2></em></p>
+        <p>Vue.js uses an HTML-based template syntax that allows you to declaratively bind the rendered DOM to the underlying Vue instance’s data. All Vue.js templates are valid HTML that can be parsed by spec-compliant browsers and HTML parsers.</p>
+        <p>Under the hood, Vue compiles the templates into Virtual DOM render functions. Combined with the reactivity system, Vue is able to intelligently figure out the minimal number of components to re-render and apply the minimal amount of DOM manipulations when the app state changes.</p>
+        <p>If you are familiar with Virtual DOM concepts and prefer the raw power of JavaScript, you can also directly write render functions instead of templates, with optional JSX support.</p>
+        <p>The most basic form of data binding is text interpolation using the “Mustache” syntax (double curly braces):</p>
+        <p><pre><code><span style="color:#8877A3">
+            Message: {{ msg }}
+        </span></code></pre></p>
+        <p>he mustache tag will be replaced with the value of the msg property on the corresponding data object. It will also be updated whenever the data object’s msg property changes.</p>
+        <p>You can also perform one-time interpolations that do not update on data change by using the v-once directive, but keep in mind this will also affect any other bindings on the same node:</p>
+        <p>The double mustaches interprets the data as plain text, not HTML. In order to output real HTML, you will need to use the v-html directive:</p>
+    </section>
+    <section class="main-section">
+            <p id="components"><h1>components Basics</h1></p>
+            <p> <em> <h2>Base Example</h2></em></p>
+        <p><pre><code><span style="color:#8877A3">
+// Define a new component called btn-count
+ Vue.component('button-counter', {
+    data: function () {
+  return {
+   count: 0
+ }
+ },
+ template:
+})
+            </span></code></pre></p>
+
+        <p>Instead, a component’s data option must be a function, so that each instance can maintain an independent copy of the returned data object:</p>
+        <p><pre><code><span style="color:#8877A3">
+ data: function () {
+ return {
+count: 0
+ }
+}
+           </span></code></pre></p>
+        <p>Earlier, we mentioned creating a component for blog posts. The problem is, that component won’t be useful unless you can pass data to it, such as the title and content of the specific post we want to display. That’s where props come in.</p>
+        <p>rops are custom attributes you can register on a component. When a value is passed to a prop attribute, it becomes a property on that component instance. To pass a title to our blog post component, we can include it in the list of props this component accepts, using a props option:</p>
+        <p><pre><code><span style="color:#8877A3">
+ Vue.component('blog-post', {
+   props: ['title'],
+    template: '<h3>{{ title }}</h3>'
+    })
+                </span></code></pre></p>
+        <p>In a typical app, however, you’ll likely have an array of posts in data:</p>
+        <p>
+                <pre><code><span style="color:#8877A3">
+   new Vue({e
+    l: '#blog-post-demo',
+ data: {
+ posts: [
+ { id: 1, title: 'My journey with Vue' },
+{ id: 2, title: 'Blogging with Vue' },
+{ id: 3, title: 'Why Vue is so fun' }
+ ]
+  }
+})
+            </span></code></pre></p>
+        </section>    
+</main>
+</body>
+</html>
